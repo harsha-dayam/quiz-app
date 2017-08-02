@@ -46,10 +46,10 @@
 
   <div class="bg-image">
     <div class="container">
-      <div class="a">
+      <div class="logo">
       <img  src="images/bulb.svg" class="img-responsive img-logo" alt="App Logo">
       </div>
-      <div class="b">
+      <div class="header">
         <h1>Quiz</h1>
         <h1>Challenge</h1>
       </div>
@@ -59,19 +59,19 @@
   <div class="bg-image1">
     <div class="container">
       <div id="topics" class="row">
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 col-sm-6 text-center" onClick="">
           <img class="img-responsive p-image" src="http://via.placeholder.com/100x100">
           <h2>Topic 1</h2>
           <p>Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui.</p>
           <p><a class="btn btn-large btn-success" href="#">Go »</a></p>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 col-sm-6 text-center">
           <img class="img-responsive p-image" src="http://via.placeholder.com/100x100">
           <h2>Topic 2</h2>
           <p>Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui.</p>
           <p><a class="btn btn-large btn-success" href="#">Go »</a></p>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 col-sm-6 text-center">
           <img class="img-responsive p-image" src="http://via.placeholder.com/100x100">
           <h2>Topic 3</h2>
           <p>Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui. Donec sed odio dui.</p>
@@ -88,13 +88,17 @@
   var quizVar = quiz.topics;
   var temp = "";
   for (var i = 0; i < quizVar.length; i++) {
-    temp+='<div class="col-md-4 text-center">';
+    temp+='<div class="col-md-4 col-sm-6 text-center" onclick="topicNo('+i+')">';
     temp+='<img class="img-responsive p-image" src="'+quizVar[i].picture+'">';
     temp+='<h2>'+quizVar[i].name+'</h2>';
     temp+='<p>'+quizVar[i].description+'</p>';
-    temp+='<p><a class="btn btn-large btn-success" href="quiz.html">Go »</a></p></div>';    
+    temp+='<p><a class="btn btn-large btn-success" onclick="topicNo('+i+')">Go »</a></p></div>';    
   }
-  document.getElementById("topics").innerHTML=temp;  
+  document.getElementById("topics").innerHTML=temp;
+  function topicNo(x){
+    localStorage.setItem('topicNo', x);
+    window.location.href = 'quiz.html';
+  }  
 </script>
 </body>
 </html>
