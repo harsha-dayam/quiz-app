@@ -24,67 +24,39 @@
      </div>
      <div class="row">
       <div class="col-md-6">
-       <p class="text-center"><a class="btn btn-default btn-lg" href="#" role="button">A</a></p>
+       <p class="text-center"><label class="btn btn-default btn-lg"><input type="radio" value="A" name="options"> A</input></label></p>
      </div>
      <div class="col-md-6">
-       <p class="text-center"><a class="btn btn-default btn-lg" href="#" role="button">B</a></p>
+       <p class="text-center"><label class="btn btn-default btn-lg"><input type="radio" value="B" name="options"> B</input></label></p>
      </div>
      <div class="col-md-6">
-       <p class="text-center"><a class="btn btn-default btn-lg" href="#" role="button">C</a></p>
+       <p class="text-center"><label class="btn btn-default btn-lg"><input type="radio" value="C" name="options"> C</input></label></p>
      </div>
      <div class="col-md-6">
-       <p class="text-center"><a class="btn btn-default btn-lg" href="#" role="button">D</a></p>
+       <p class="text-center"><label class="btn btn-default btn-lg"><input type="radio" value="D" name="options"> D</input></label></p>
      </div>
    </div>
  </div>
 
  <div class="row">
   <div class="col-md-4">
-   <p class="pull-right"><a class="btn btn-danger btn-lg" href="#" role="button"><span class="glyphicon glyphicon-step-forward"></span> Skip</a></p>
+   <p class="pull-right"><button id="skip" class="btn btn-danger btn-lg" role="button" onclick="skipQ()"><span class="glyphicon glyphicon-step-forward"></span> Skip</a></p>
  </div>
- <div class="col-md-4" id="previous">
-   <p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button" onclick="prevQ()"><span class="glyphicon glyphicon-backward"></span> Previous</a></p>
+ <div class="col-md-4">
+   <p class="text-center"><button id="previous" class="btn btn-primary btn-lg" href="#" role="button" onclick="prevQ()"><span class="glyphicon glyphicon-backward"></span> Previous</a></p>
  </div>
- <div class="col-md-4" id="submit">
-   <p class="pull-left"><a class="btn btn-success btn-lg" href="#" role="button" onclick="nextQ()"><span class="glyphicon glyphicon-forward"></span> Next</a></p>
+ <div class="col-md-4 next">
+   <p class="pull-left"><button id="next" class="btn btn-success btn-lg" href="#" role="button" onclick="nextQ()"><span class="glyphicon glyphicon-forward"></span> Next</a></p>
+ </div>
+ <div class="col-md-4">
+   <p class="pull-left"><button id="submit" class="btn btn-success btn-lg" href="#" role="button" onclick="nextQ()"><span class="glyphicon glyphicon-ok"></span> Submit</a></p>
  </div>
  
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/object.js"></script>
 <script type="text/javascript" src="js/quiz.js"></script>
-<script type="text/javascript">
-  var qno = 0;
-  var temp="";
-  var qVar = quiz.topics[localStorage.getItem('topicNo')];
-  renderQ();
-  function nextQ(){
-    if(qno<qVar.questions.length-1){
-    qno++;
-    renderQ();
-  }
-  }
-  function prevQ(){
-    if(qno>0){
-    qno--;
-    renderQ();
-  }
-  }
-  function renderQ(){
-    temp = '<div class="well"><h2 class="text-center">'+qVar.questions[qno].q+'</h2></div><div class="row">';
-  for (var i = 0; i < qVar.questions[qno].options.length; i++) {    
-    temp+='<div class="col-md-6"><p class="text-center"><a class="btn btn-default btn-lg" href="#" role="button">'+qVar.questions[qno].options[i]+'</a></p></div>';
-  }
-  temp+="</div>";
-  document.getElementById("question").innerHTML=temp;
-  if (qno==qVar.questions.length-1){
-    document.getElementById("submit").innerHTML = '<p class="pull-left"><a class="btn btn-success btn-lg" href="#" role="button" onclick=""><span class="glyphicon glyphicon-ok"></span> Submit</a></p>';
-  }
-  else {document.getElementById("submit").innerHTML = '<p class="pull-left"><a class="btn btn-success btn-lg" href="#" role="button" onclick="nextQ()"><span class="glyphicon glyphicon-forward"></span> Next</a></p>';}
-  if (qno==0){document.getElementById("previous").innerHTML='';}
-  else if (qno>0){document.getElementById("previous").innerHTML='<p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button" onclick="prevQ()"><span class="glyphicon glyphicon-backward"></span> Previous</a></p>';}
-  }  
-</script>
 </body>
 </html>
