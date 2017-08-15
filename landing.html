@@ -47,7 +47,7 @@
   <div class="bg-image">
     <div class="container">
       <div class="logo">
-      <img  src="images/bulb.svg" class="img-responsive img-logo" alt="App Logo">
+        <img  src="images/bulb.svg" class="img-responsive img-logo" alt="App Logo">
       </div>
       <div class="header">
         <h1>Quiz</h1>
@@ -85,20 +85,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/object.js"></script>
   <script type="text/javascript">
-  var quizVar = quiz.topics;
-  var temp = "";
-  for (var i = 0; i < quizVar.length; i++) {
-    temp+='<div class="col-md-4 col-sm-6 text-center" onclick="topicNo('+i+')">';
-    temp+='<img class="img-responsive p-image" src="'+quizVar[i].picture+'">';
-    temp+='<h2>'+quizVar[i].name+'</h2>';
-    temp+='<p>'+quizVar[i].description+'</p>';
-    temp+='<p><a class="btn btn-large btn-success" onclick="topicNo('+i+')">Go »</a></p></div>';    
-  }
-  document.getElementById("topics").innerHTML=temp;
-  function topicNo(x){
-    localStorage.setItem('topicNo', x);
-    window.location.href = 'quiz.html';
-  }  
-</script>
+    var quizVar = quiz.topics;
+    var temp = "";
+    for (var i = 0; i < quizVar.length; i++) {
+      temp+='<div class="col-md-4 col-sm-6 text-center" onclick="topicNo('+i+')">';
+      temp+='<img class="img-responsive p-image" src="'+quizVar[i].picture+'">';
+      temp+='<h2>'+quizVar[i].name+'</h2>';
+      temp+='<p>'+quizVar[i].description+'</p>';
+      temp+='<p><a class="btn btn-large btn-success" onclick="topicNo('+i+')">Go »</a></p></div>';    
+    }
+    document.getElementById("topics").innerHTML=temp;
+    function topicNo(x){
+      sessionStorage.setItem('topicNo', x);
+      window.location.href = 'quiz.html';
+    }  
+  </script>
 </body>
 </html>
