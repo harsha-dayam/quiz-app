@@ -123,9 +123,6 @@ input{
   background: linear-gradient(to bottom, #d0d6e8 50%,#d0d6e8 50%,#5b6577 88%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d6e8', endColorstr='#5b6577',GradientType=0 ); /* IE6-9 */
 }
-#previous{
-  visibility: hidden;
-}
 /* TOP MODAL*/
 #topModal{
   display: none;

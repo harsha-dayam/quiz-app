@@ -1,52 +1,63 @@
-var qno = 0;
-if(sessionStorage.getItem("questionNo")) qno = sessionStorage.getItem("questionNo");
-var qVar = quiz.topics[sessionStorage.getItem('topicNo')];
+var topNo;
+var qno;
+var qVar;
 var answers = [];
-if(sessionStorage.getItem(qVar.name)) answers=sessionStorage.getItem(qVar.name).split(",");
+var timeLeft = [];
 var temp="";
 
+// Clock
+var canvas ;
+var ctx ;
+var radius;
+var minute = 0;
+// minute=-(2*Math.PI/70);
+
 /* Timer */
-var timeLimit = (qVar.questions.length)*60000;
-if(sessionStorage.getItem("dist")) timeLimit = sessionStorage.getItem("dist");
-// function foo() {   
-//     timeLimit -= 1000;
-//     var minutes = Math.floor((timeLimit % (1000 * 60 * 60)) / (1000 * 60));
-//     minutes = ("0" + minutes).slice(-2);
-//     var seconds = Math.floor((timeLimit % (1000 * 60)) / 1000);
-//     seconds = ("0" + seconds).slice(-2);
-//     document.getElementById("time").innerHTML = minutes + ":" + seconds;
+var timeLimit=[];
+var timer;
 
-//     if (timeLimit < 0) {       
-//         alert("timeup");
-//         nextQ();
-//         timeLimit=6000;
-//     }
-//    setTimeout(foo, 1000);
-// }
-// foo();
+function init() {
+  topNo = sessionStorage.getItem('topicNo');
+  qno = 0;
+  if(sessionStorage.getItem("qno"+topNo)) qno = parseInt(sessionStorage.getItem("qno"+topNo));
+  qVar = quiz.topics[topNo];
+  if(sessionStorage.getItem(qVar.name)) answers=sessionStorage.getItem(qVar.name).split(",");
+  if(sessionStorage.getItem("dist")) {timeLimit = sessionStorage.getItem("dist").split(",");}
+  if(timeLimit[topNo]) timeLimit[topNo]=parseInt(timeLimit[topNo]);
+  else timeLimit[topNo]= 60000*qVar.questions.length;  
+  //timerStart();
+  document.getElementById("topic").innerHTML = qVar.name;
+  renderQ();
+  // Clock
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
+  radius = canvas.height / 2;
+  ctx.translate(radius, radius);
+  radius = radius * 0.90;
+  minute=-(Math.PI/179);
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
 
-var timer = setInterval(function() {
-  
-  drawHand();
-  timeLimit -= 1000;
+  //timer
+  var timer = setInterval(function() {
+    drawHand();
+    timeLimit[topNo] -= 1000;
 
-  var minutes = Math.floor((timeLimit % (1000 * 60 * 60)) / (1000 * 60));
-  minutes = ("0" + minutes).slice(-2);
-  var seconds = Math.floor((timeLimit % (1000 * 60)) / 1000);
-  seconds = ("0" + seconds).slice(-2);
-  
-  document.getElementById("time").innerHTML = minutes + ":" + seconds;
-  //document.getElementById("time").style.display = "inline-block";
+    var minutes = Math.floor((timeLimit[topNo] % (1000 * 60 * 60)) / (1000 * 60));
+    minutes = ("0" + minutes).slice(-2);
+    var seconds = Math.floor((timeLimit[topNo] % (1000 * 60)) / 1000);
+    seconds = ("0" + seconds).slice(-2);
 
-  if (timeLimit < 0) {
-    clearInterval(timer);
-    document.getElementById("time").innerHTML = "00:00";
-    document.getElementById("topModal").style.display = "block";
-  }
-}, 1000);
+    document.getElementById("time").innerHTML = minutes + ":" + seconds;
+    //document.getElementById("time").style.display = "inline-block";
 
-document.getElementById("topic").innerHTML = qVar.name;
-renderQ();
+    if (timeLimit[topNo]< 0) {
+      clearInterval(timer);
+      document.getElementById("time").innerHTML = "00:00";
+      document.getElementById("topModal").style.display = "block";
+    }
+  }, 1000);
+}
 
 function nextQ(){
   if(qno<qVar.questions.length-1){
