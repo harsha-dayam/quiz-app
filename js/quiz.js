@@ -59,6 +59,8 @@ function init() {
   }, 1000);
 }
 
+init();
+
 function nextQ(){
   if(qno<qVar.questions.length-1){
     qno++;
@@ -207,15 +209,6 @@ function nextTopic(){
 }
 
 // Clock
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var radius = canvas.height / 2;
-ctx.translate(radius, radius);
-var minute = 0;
-radius = radius * 0.90;
-minute=-(Math.PI/179);
-drawFace(ctx, radius);
-drawNumbers(ctx, radius);
 
 function drawHand() {
   minute+=(((2*Math.PI)/3)/60);
